@@ -12,13 +12,7 @@ const Perfil = ({ nomeUsuario }) => {
     
     useEffect(() => {
         fetch(`https://api.github.com/users/${nomeUsuario}`)
-        .then(res => {
-            console.log(res);
-            if (!res.ok) {
-                throw new Error(`Erro: ${response.status}`);
-            }
-            res.json()
-        })
+        .then(res => res.json())
         .then(resJson => {
             setTimeout(() => {
                 setMostrarUser(true);
