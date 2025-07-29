@@ -7,15 +7,29 @@ const ReposList = ({ nomeUsuario }) => {
 
     const [estaCargando, setEstaCargando] = useState(true);
 
+    const [deuError, setError] = useState(true);
+
     useEffect(() => {
         setEstaCargando(true);
         fetch(`https://api.github.com/users/${nomeUsuario}/repos`)
-        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            if (!res.ok) {
+                throw new Error(`Erro: ${response.status}`);
+            }
+            res.json()
+        })
         .then(resJson => {
             setTimeout(() => {
                 setEstaCargando(false);
                 setRepos(resJson);
+                setError(false);
             }, 2000);
+        })
+        .catch(e => {
+            setError(true);
+            return ;
+            //throw new Error(`Usuario ${nomeUsuario} não existe`);
         })
     }, [nomeUsuario]);
 
@@ -24,6 +38,9 @@ const ReposList = ({ nomeUsuario }) => {
             { estaCargando ? (
                 <h1>Carregando...</h1>
             ) : (
+                (repos.status === '404') ? (
+                    <h1>usuario no encontrado</h1> 
+                ) : (
                 <>
                 <h3>Repositorios</h3>
                 <ul className={styles.list}>
@@ -43,9 +60,8 @@ const ReposList = ({ nomeUsuario }) => {
                     ))}
                 </ul>
                 </>
-            )}
-                
-            
+                )
+            )}        
         </div>
     )
 }

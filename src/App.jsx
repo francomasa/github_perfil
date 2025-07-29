@@ -9,13 +9,18 @@ function App() {
   const [nomeUsuario, setNomeUsuario] = useState('');
   return(
     <>
-      <input type="text" onBlur={(e) => setNomeUsuario(e.target.value)} />
+      <header>
+            <span>Buscar Usuario Github</span><br />
+            <input type="text" onBlur={(e) => setNomeUsuario(e.target.value)} placeholder="Insira nome de usuario" />
+      </header>
       {nomeUsuario.length > 4 && (
         <>
         <Perfil nomeUsuario={nomeUsuario} />
         <ReposList nomeUsuario={nomeUsuario} />
         </>
       )}
+        
+      
       {/* { 
       formularioEstaVisivel && (
       <Formulario />
