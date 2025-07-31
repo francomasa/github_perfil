@@ -30,7 +30,17 @@ h3 {
     align-items: center;
     padding: 10px 0 40px;
 }
-
+    .header button {
+        background-color: var(--corSecundaria);
+        color:  var(--corPrincipal);
+        text-align: center;
+        font-weight: bold;
+        padding: 8px 28px;
+    }
+    .header input {
+        height: 40px;
+        margin: 10px 0;
+    }
 
 .deuErro {
     margin: 24px;
