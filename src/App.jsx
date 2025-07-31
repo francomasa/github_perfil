@@ -22,7 +22,7 @@ function App() {
       </header> */}
       {nomeUsuario.length > 4 && (
         <>
-        <Perfil nomeUsuario={nomeUsuario} />
+        {/* <Perfil nomeUsuario={nomeUsuario} /> */}
         <ReposList nomeUsuario={nomeUsuario} />
         </>
       )}

@@ -30,3 +30,14 @@ h3 {
     align-items: center;
     padding: 10px 0 40px;
 }
+
+
+.deuErro {
+    margin: 24px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.deuErro b {
+    color: red;
+}

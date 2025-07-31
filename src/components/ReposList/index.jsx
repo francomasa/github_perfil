@@ -22,40 +22,53 @@ const ReposList = ({ nomeUsuario }) => {
         })
         .catch(e => {
             setError(true);
-            throw new Error(`Usuario ${nomeUsuario} não existe`);
+            console.log(e);
+            //throw new Error(`Usuario ${nomeUsuario} não existe`);
         })
     }, [nomeUsuario]);
 
+    console.log(repos);
     return (
-        <div className="container">
+        <>
             { estaCargando ? (
                 <h1>Carregando...</h1>
             ) : (
-                (deuError || (repos.status === '404')) ? (
-                    <h1>usuario no encontrado</h1> 
-                ) : (
-                <>
-                <h3>Repositorios</h3>
-                <ul className={styles.list}>
-                    {/* {repos.map(repositorio => ( */}
-                    {repos.map(({id, name, language, html_url}) => (
-                        <li className={styles.listItem} key={id}>
-                            <div className={styles.itemName}>
-                                <b>Nome:</b> 
-                                {name}
-                            </div>
-                            <div className={styles.itemLanguage}>
-                                <b>Linguage:</b> 
-                                {language}
-                            </div>
-                            <a className={styles.itemLink} target="_blank" href={html_url}>Visitar no GitHub</a>
-                        </li>
-                    ))}
-                </ul>
-                </>
-                )
-            )}        
-        </div>
+            (deuError || (repos.status === '404')) ? (
+                <div className="container">
+                    <h1 className="deuErro">Usuario <b>{nomeUsuario}</b> no encontrado</h1>
+                </div>
+            ) : (
+            <>
+                <div className={styles.header}>
+                    {/* { JSON.stringify(props)} */}
+                    <img className={styles.avatar} src={`https://github.com/${nomeUsuario}.png`} alt={`Avatar de ${nomeUsuario}`} />
+                    <h1 className={styles.name}>
+                        {nomeUsuario}
+                    </h1>
+                </div>
+                <div className="container">
+                    <h3>Repositorios</h3>
+                    <ul className={styles.list}>
+                        {/* {repos.map(repositorio => ( */}
+                        {repos.map(({id, name, language, html_url}) => (
+                            <li className={styles.listItem} key={id}>
+                                <div className={styles.itemName}>
+                                    <b>Nome:</b> 
+                                    {name}
+                                </div>
+                                <div className={styles.itemLanguage}>
+                                    <b>Linguage:</b> 
+                                    {language}
+                                </div>
+                                <a className={styles.itemLink} target="_blank" href={html_url}>Visitar no GitHub</a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </>
+            )
+        )}        
+        </>
     )
 }
 
