@@ -31,7 +31,9 @@ const ReposList = ({ nomeUsuario }) => {
     return (
         <>
             { estaCargando ? (
-                <h1>Carregando...</h1>
+                <div className="container">
+                    <h3>Carregando...</h3>
+                </div>
             ) : (
             (deuError || (repos.status === '404')) ? (
                 <div className="container">
@@ -39,7 +41,8 @@ const ReposList = ({ nomeUsuario }) => {
                 </div>
             ) : (
             <>
-                <Perfil nomeUsuario={nomeUsuario} />
+                <Perfil nomeUsuario={nomeUsuario} /
+                >
                 <div className="container">
                     <h3>Repositorios</h3>
                     <ul className={styles.list}>
