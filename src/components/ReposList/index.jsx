@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import Perfil from "../Perfil";
 import styles from './ReposList.module.css';
 
 const ReposList = ({ nomeUsuario }) => {
@@ -39,13 +39,7 @@ const ReposList = ({ nomeUsuario }) => {
                 </div>
             ) : (
             <>
-                <div className={styles.header}>
-                    {/* { JSON.stringify(props)} */}
-                    <img className={styles.avatar} src={`https://github.com/${nomeUsuario}.png`} alt={`Avatar de ${nomeUsuario}`} />
-                    <h1 className={styles.name}>
-                        {nomeUsuario}
-                    </h1>
-                </div>
+                <Perfil nomeUsuario={nomeUsuario} />
                 <div className="container">
                     <h3>Repositorios</h3>
                     <ul className={styles.list}>
