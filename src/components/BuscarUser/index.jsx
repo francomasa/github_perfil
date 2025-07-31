@@ -1,37 +1,44 @@
 import { useState, useEffect } from 'react';
+
 import styles from './BuscarUser.module.css'
 
 // Podemos exportar uma arrow function sem nome
 // export default () => {} 
 // tambem desta maneira
 // export default function() {} 
-const BuscarUser = () => {
+const BuscarUser = ({ nomeUsuario }) => {
+    const [usuario, setUsuario] = useState(nomeUsuario);
     const [repositorio, setRepositorio] = useState([]);
-    const [user, setUser] = useState('');
     const [findUser, setFindUser] = useState(true);
+    console.log(nomeUsuario);
 
-    if(user !== ''){
-        
         useEffect(() => {
                 //fetch(`https://api.github.com/users/${nomeUsuario}/repos`)
-                fetch(`https://api.github.com/users/${user}/repos`)
+                fetch(`https://api.github.com/users/${usuario}/repos`)
                 .then(res => res.json())
                 .then(resJson => {
-                        setRepositorio(resJson);
+                    setRepositorio(resJson);
+                    setFindUser(true);
+                    console.log(resJson);
                 })
                 .catch(e => {
                     setFindUser(false);
-                    setUser('');
+                    console.log(e);
+                    setUsuario('');
                 })
-            }, [user]);
+            }, [usuario]);
+    
+
+    if(repositorio.status){
+        setFindUser(false);
     }
     
     return (
         
         <header className={styles.header}>
             <span>Buscar Usuario Github</span><br />
-            <input type="text" onBlur={(e) => setUser(e.target.value)} placeholder='Insira usuario Github' />
-            {(!findUser) && (user.length === 0) && (<span>Usuario no existe {user}</span>)}
+            <input type="text" value={nomeUsuario} onBlur={(e) => setUsuario(e.target.value)} placeholder='Insira usuario Github' />
+            {(!findUser) && (repositorio.length === 0) && (<span>Usuario no existe {user}</span>)}
         </header>
         
     )
